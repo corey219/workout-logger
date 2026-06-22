@@ -274,6 +274,33 @@
         { name: "Standing calf raise", target: "4×10", oneRM: "", sets: [{w:"", r:"10", rir:"2"}, {w:"", r:"10", rir:"2"}, {w:"", r:"10", rir:"2"}, {w:"", r:"10", rir:"2"}] },
         { name: "Forearm plank / leg raise", target: "3 sets", oneRM: "", sets: [{w:"BW", r:"", rir:""}, {w:"BW", r:"", rir:""}, {w:"BW", r:"", rir:""}] }
       ],
+      "Machine A — Push + Quads": [
+        { name: "Machine chest press", target: "3×8–12", oneRM: "", sets: [{w:"", r:"10", rir:"2"}, {w:"", r:"10", rir:"2"}, {w:"", r:"10", rir:"2"}] },
+        { name: "Seated cable/machine row", target: "3×8–12", oneRM: "", sets: [{w:"", r:"10", rir:"2"}, {w:"", r:"10", rir:"2"}, {w:"", r:"10", rir:"2"}] },
+        { name: "Leg press or hack squat", target: "3×10–15", oneRM: "", sets: [{w:"", r:"12", rir:"2"}, {w:"", r:"12", rir:"2"}, {w:"", r:"12", rir:"2"}] },
+        { name: "Machine lateral raise", target: "3×12–20", oneRM: "", sets: [{w:"", r:"15", rir:"2"}, {w:"", r:"15", rir:"1"}, {w:"", r:"15", rir:"0"}] },
+        { name: "Cable face pull / rear delt machine", target: "2–3×15–20", oneRM: "", sets: [{w:"", r:"15", rir:"2"}, {w:"", r:"15", rir:"1"}] },
+        { name: "Cable tricep pressdown", target: "2–3×10–15", oneRM: "", sets: [{w:"", r:"12", rir:"1"}, {w:"", r:"12", rir:"0"}] },
+        { name: "Optional calf raise machine", target: "2×12–20", oneRM: "", sets: [{w:"", r:"15", rir:"1"}, {w:"", r:"15", rir:"1"}] }
+      ],
+      "Machine B — Pull + Posterior": [
+        { name: "Neutral-grip lat pulldown", target: "3×8–12", oneRM: "", sets: [{w:"", r:"10", rir:"2"}, {w:"", r:"10", rir:"2"}, {w:"", r:"10", rir:"1"}] },
+        { name: "Machine chest-supported row", target: "3×8–12", oneRM: "", sets: [{w:"", r:"10", rir:"2"}, {w:"", r:"10", rir:"2"}, {w:"", r:"10", rir:"1"}] },
+        { name: "Seated or lying leg curl", target: "3×10–15", oneRM: "", sets: [{w:"", r:"12", rir:"1"}, {w:"", r:"12", rir:"1"}, {w:"", r:"12", rir:"1"}] },
+        { name: "Hip thrust / glute drive machine", target: "3×8–12", oneRM: "", sets: [{w:"", r:"10", rir:"2"}, {w:"", r:"10", rir:"2"}, {w:"", r:"10", rir:"2"}] },
+        { name: "Cable pullover / straight-arm pulldown", target: "2×12–15", oneRM: "", sets: [{w:"", r:"12", rir:"2"}, {w:"", r:"12", rir:"1"}] },
+        { name: "Machine or cable curl", target: "2–3×10–15", oneRM: "", sets: [{w:"", r:"12", rir:"1"}, {w:"", r:"12", rir:"0"}] },
+        { name: "Pallof press / cable anti-rotation", target: "2×10–12/side", oneRM: "", sets: [{w:"", r:"10/side", rir:"2"}, {w:"", r:"10/side", rir:"2"}] }
+      ],
+      "Machine C — Full-body Pump": [
+        { name: "Incline machine press", target: "3×8–12", oneRM: "", sets: [{w:"", r:"10", rir:"2"}, {w:"", r:"10", rir:"2"}, {w:"", r:"10", rir:"2"}] },
+        { name: "Machine high row or pulldown", target: "3×10–12", oneRM: "", sets: [{w:"", r:"10", rir:"2"}, {w:"", r:"10", rir:"2"}, {w:"", r:"10", rir:"1"}] },
+        { name: "Leg extension", target: "2–3×12–20", oneRM: "", sets: [{w:"", r:"15", rir:"1"}, {w:"", r:"15", rir:"1"}] },
+        { name: "Seated leg curl", target: "2–3×12–20", oneRM: "", sets: [{w:"", r:"15", rir:"1"}, {w:"", r:"15", rir:"1"}] },
+        { name: "Pec deck or cable fly", target: "2×12–15", oneRM: "", sets: [{w:"", r:"12", rir:"1"}, {w:"", r:"12", rir:"1"}] },
+        { name: "Reverse pec deck", target: "3×15–20", oneRM: "", sets: [{w:"", r:"15", rir:"1"}, {w:"", r:"15", rir:"1"}, {w:"", r:"15", rir:"0"}] },
+        { name: "Calf raise machine", target: "3×10–20", oneRM: "", sets: [{w:"", r:"15", rir:"1"}, {w:"", r:"15", rir:"1"}, {w:"", r:"15", rir:"0"}] }
+      ],
       "Custom blank": []
     };
 
@@ -342,7 +369,7 @@
     function modeForTemplate(name) {
       if (name.includes("Maintain")) return "🟡 Maintain";
       if (name.includes("Return")) return "🔵 Return";
-      if (name.includes("Build")) return "🟢 Build";
+      if (name.includes("Build") || name.includes("Machine")) return "🟢 Build";
       return "Custom";
     }
 

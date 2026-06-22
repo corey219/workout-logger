@@ -1,0 +1,561 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0f172a" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="Workout Logger" />
+  <title>Workout Logger</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --panel: #111827;
+      --panel-2: #172033;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --border: #263244;
+      --accent: #38bdf8;
+      --accent-2: #22c55e;
+      --danger: #fb7185;
+      --warn: #fbbf24;
+      --radius: 18px;
+      color-scheme: dark;
+    }
+    * { box-sizing: border-box; }
+    html { background: var(--bg); }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif;
+      background: linear-gradient(180deg, #0b1020 0%, #111827 45%, #0b1020 100%);
+      color: var(--text);
+      padding: max(14px, env(safe-area-inset-top)) 14px max(24px, env(safe-area-inset-bottom));
+    }
+    .app { max-width: 760px; margin: 0 auto; }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      margin: -14px -14px 14px;
+      padding: max(14px, env(safe-area-inset-top)) 14px 12px;
+      background: rgba(11, 16, 32, 0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    h1 { margin: 0 0 4px; font-size: 24px; letter-spacing: -0.03em; }
+    .sub { margin: 0; color: var(--muted); font-size: 13px; }
+    .grid { display: grid; gap: 12px; }
+    .card {
+      background: rgba(17, 24, 39, 0.92);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px;
+      box-shadow: 0 14px 32px rgba(0,0,0,.22);
+    }
+    label { display: block; color: var(--muted); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 6px; }
+    input, select, textarea, button {
+      font: inherit;
+      border-radius: 12px;
+    }
+    input, select, textarea {
+      width: 100%;
+      background: #0f172a;
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 12px;
+      min-height: 46px;
+      outline: none;
+    }
+    textarea { min-height: 88px; resize: vertical; line-height: 1.35; }
+    input:focus, select:focus, textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(56,189,248,.13); }
+    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .row3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+    .row4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 8px; }
+    @media (max-width: 520px) {
+      .row, .row3 { grid-template-columns: 1fr; }
+      .row4 { grid-template-columns: 1fr 1fr; }
+    }
+    button {
+      width: 100%;
+      border: 0;
+      background: #243045;
+      color: var(--text);
+      min-height: 46px;
+      padding: 11px 12px;
+      font-weight: 800;
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+    button.primary { background: linear-gradient(135deg, #0284c7, #22c55e); color: white; }
+    button.good { background: rgba(34,197,94,.18); color: #bbf7d0; border: 1px solid rgba(34,197,94,.33); }
+    button.warn { background: rgba(251,191,36,.13); color: #fde68a; border: 1px solid rgba(251,191,36,.28); }
+    button.danger { background: rgba(251,113,133,.12); color: #fecdd3; border: 1px solid rgba(251,113,133,.25); }
+    button.ghost { background: transparent; border: 1px solid var(--border); color: var(--muted); }
+    button:active { transform: translateY(1px); }
+    .toolbar { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .pillrow { display: flex; flex-wrap: wrap; gap: 8px; }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 7px 10px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--muted);
+      background: rgba(255,255,255,.03);
+      font-size: 13px;
+    }
+    .lift {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: rgba(15, 23, 42, .72);
+      padding: 12px;
+      margin-top: 12px;
+    }
+    .lift-head { display: flex; justify-content: space-between; gap: 10px; align-items: flex-start; margin-bottom: 10px; }
+    .lift-title { font-weight: 900; font-size: 17px; letter-spacing: -.01em; }
+    .lift-meta { color: var(--muted); font-size: 13px; margin-top: 3px; }
+    .set {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr auto;
+      gap: 8px;
+      align-items: end;
+      padding: 10px 0;
+      border-top: 1px solid rgba(255,255,255,.07);
+    }
+    .set:first-of-type { border-top: 0; }
+    .set label { margin-bottom: 4px; font-size: 10px; }
+    .set button { min-height: 42px; width: 42px; padding: 0; }
+    .muted { color: var(--muted); }
+    .small { font-size: 12px; }
+    .estimate { color: #bae6fd; font-size: 12px; margin-top: 8px; }
+    .hidden { display: none !important; }
+    .toast {
+      position: fixed;
+      left: 14px;
+      right: 14px;
+      bottom: max(14px, env(safe-area-inset-bottom));
+      z-index: 99;
+      background: #052e16;
+      color: #dcfce7;
+      border: 1px solid rgba(34,197,94,.45);
+      border-radius: 14px;
+      padding: 12px 14px;
+      max-width: 760px;
+      margin: 0 auto;
+      box-shadow: 0 14px 32px rgba(0,0,0,.35);
+    }
+    .copybox { margin-top: 12px; }
+    .copybox textarea { min-height: 260px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12px; }
+    details summary { cursor: pointer; color: #bae6fd; font-weight: 800; }
+    .footer { text-align: center; color: var(--muted); font-size: 12px; margin: 18px 0 6px; }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <h1>Workout Logger</h1>
+      <p class="sub">Vault-local logger · saves on this device · exports Markdown for Obsidian</p>
+    </header>
+
+    <main class="grid">
+      <section class="card grid">
+        <div class="row">
+          <div>
+            <label for="date">Date</label>
+            <input id="date" type="date" />
+          </div>
+          <div>
+            <label for="sessionName">Session</label>
+            <input id="sessionName" placeholder="Upper Power / Maintain A / Custom" />
+          </div>
+        </div>
+        <div class="row3">
+          <div>
+            <label for="mode">Mode</label>
+            <select id="mode">
+              <option>🟢 Build</option>
+              <option>🟡 Maintain</option>
+              <option>🔵 Return</option>
+              <option>Custom</option>
+            </select>
+          </div>
+          <div>
+            <label for="readiness">Readiness</label>
+            <select id="readiness">
+              <option>Normal — RIR 2</option>
+              <option>Great — RIR 1–2</option>
+              <option>Meh — RIR 2–3 / cut set</option>
+              <option>Rough — RIR 3 / skip</option>
+            </select>
+          </div>
+          <div>
+            <label for="template">Load template</label>
+            <select id="template"></select>
+          </div>
+        </div>
+        <div class="toolbar">
+          <button class="primary" id="loadTemplate">Load Template</button>
+          <button class="ghost" id="addLift">+ Add Lift</button>
+        </div>
+        <div class="pillrow" id="stats"></div>
+      </section>
+
+      <section class="card">
+        <label>Lifts</label>
+        <div id="lifts"></div>
+      </section>
+
+      <section class="card grid">
+        <div>
+          <label for="notes">Session notes</label>
+          <textarea id="notes" placeholder="What mattered? Pain, PRs, substitutions, what to do next..."></textarea>
+        </div>
+        <div class="toolbar">
+          <button class="good" id="copyMarkdown">Copy Markdown</button>
+          <button class="warn" id="previewMarkdown">Preview</button>
+        </div>
+        <div class="toolbar">
+          <button class="ghost" id="saveDraft">Save Draft</button>
+          <button class="danger" id="resetSession">Reset</button>
+        </div>
+        <div id="copyArea" class="copybox hidden">
+          <label for="markdownOut">Markdown export</label>
+          <textarea id="markdownOut" readonly></textarea>
+          <p class="small muted">If iOS/Safari blocks clipboard access, long-press/select this text and copy manually.</p>
+        </div>
+        <details>
+          <summary>How to install on phone</summary>
+          <p class="small muted">Open this file from Obsidian/iCloud/Files in Safari, then Share → Add to Home Screen. It still saves drafts locally on that browser/device.</p>
+        </details>
+      </section>
+    </main>
+
+    <p class="footer">Source of truth: wiki/analysis-workout-log-2026-04.md · Tool: tools/workout-logger.html</p>
+  </div>
+  <div id="toast" class="toast hidden"></div>
+
+  <script>
+    const STORAGE_KEY = "corey-workout-logger-v1";
+
+    const templates = {
+      "Maintain A — push bias": [
+        { name: "Banded face pulls", target: "2×15", oneRM: "", sets: [{w:"Red", r:"15", rir:"3"}, {w:"Red", r:"15", rir:"3"}] },
+        { name: "Flat DB press", target: "2×8", oneRM: "80", sets: [{w:"60", r:"8", rir:"2"}, {w:"60", r:"8", rir:"2"}] },
+        { name: "Chest-supported / 1-arm DB row", target: "2×8", oneRM: "60", sets: [{w:"45", r:"8", rir:"2"}, {w:"45", r:"8", rir:"2"}] },
+        { name: "Hip thrust", target: "2×12", oneRM: "90", sets: [{w:"60", r:"12", rir:"3"}, {w:"60", r:"12", rir:"3"}] },
+        { name: "Band Pallof / anti-rotation", target: "2×10/side", oneRM: "", sets: [{w:"Band", r:"10/side", rir:"3"}, {w:"Band", r:"10/side", rir:"3"}] },
+        { name: "DB lateral raise", target: "2×12", oneRM: "16", sets: [{w:"10", r:"12", rir:"2"}, {w:"10", r:"12", rir:"2"}] }
+      ],
+      "Maintain B — pull/hinge bias": [
+        { name: "Banded face pulls", target: "2×15", oneRM: "", sets: [{w:"Red", r:"15", rir:"3"}, {w:"Red", r:"15", rir:"3"}] },
+        { name: "Seated DB press", target: "2×8", oneRM: "40", sets: [{w:"30", r:"8", rir:"2"}, {w:"30", r:"8", rir:"2"}] },
+        { name: "DB pullover", target: "2×10", oneRM: "37", sets: [{w:"26", r:"10", rir:"3"}, {w:"26", r:"10", rir:"3"}] },
+        { name: "Single-leg DB RDL", target: "2×8/leg", oneRM: "20.5", sets: [{w:"15", r:"8/leg", rir:"3"}, {w:"15", r:"8/leg", rir:"3"}] },
+        { name: "Forearm plank", target: "2×40s", oneRM: "", sets: [{w:"BW", r:"40s", rir:""}, {w:"BW", r:"40s", rir:""}] },
+        { name: "Hammer curl", target: "2×10", oneRM: "21.5", sets: [{w:"15", r:"10", rir:"3"}, {w:"15", r:"10", rir:"3"}] }
+      ],
+      "Upper Power — Build": [
+        { name: "Banded face pulls", target: "3×15", oneRM: "", sets: [{w:"Red", r:"15", rir:"3"}, {w:"Red", r:"15", rir:"3"}, {w:"Red", r:"15", rir:"3"}] },
+        { name: "Seated DB press", target: "4×8", oneRM: "40", sets: [{w:"30", r:"8", rir:"2"}, {w:"30", r:"8", rir:"2"}, {w:"30", r:"8", rir:"2"}, {w:"30", r:"8", rir:"2"}] },
+        { name: "Flat DB press", target: "4×8", oneRM: "80", sets: [{w:"60", r:"8", rir:"2"}, {w:"60", r:"8", rir:"2"}, {w:"60", r:"8", rir:"2"}, {w:"60", r:"8", rir:"2"}] },
+        { name: "Chest-supported / 1-arm DB row", target: "4×8", oneRM: "60", sets: [{w:"45", r:"8", rir:"2"}, {w:"45", r:"8", rir:"2"}, {w:"45", r:"8", rir:"2"}, {w:"45", r:"8", rir:"2"}] },
+        { name: "DB pullover", target: "3×10", oneRM: "37", sets: [{w:"26", r:"10", rir:"3"}, {w:"26", r:"10", rir:"3"}, {w:"26", r:"10", rir:"3"}] },
+        { name: "DB lateral raise", target: "3×12", oneRM: "16", sets: [{w:"10", r:"12", rir:"2"}, {w:"10", r:"12", rir:"2"}, {w:"10", r:"12", rir:"2"}] },
+        { name: "DB curl", target: "4×10", oneRM: "22.5", sets: [{w:"15", r:"10", rir:"3"}, {w:"15", r:"10", rir:"3"}, {w:"15", r:"10", rir:"3"}, {w:"15", r:"10", rir:"3"}] },
+        { name: "Overhead DB tricep ext", target: "3×10", oneRM: "15", sets: [{w:"11.25", r:"10", rir:"3"}, {w:"11.25", r:"10", rir:"3"}, {w:"11.25", r:"10", rir:"3"}] }
+      ],
+      "Lower Power — Build / knee-safe": [
+        { name: "Hamstring/hip mobility", target: "5 min", oneRM: "", sets: [{w:"BW", r:"done", rir:""}] },
+        { name: "Hip thrust", target: "4×12", oneRM: "90", sets: [{w:"60", r:"12", rir:"2"}, {w:"60", r:"12", rir:"2"}, {w:"60", r:"12", rir:"2"}, {w:"60", r:"12", rir:"2"}] },
+        { name: "RDL", target: "3×8", oneRM: ">60", sets: [{w:"40", r:"8", rir:"3"}, {w:"40", r:"8", rir:"3"}, {w:"40", r:"8", rir:"3"}] },
+        { name: "Single-leg DB RDL", target: "3×8/leg", oneRM: "20.5", sets: [{w:"15", r:"8/leg", rir:"3"}, {w:"15", r:"8/leg", rir:"3"}, {w:"15", r:"8/leg", rir:"3"}] },
+        { name: "Standing calf raise", target: "4×10", oneRM: "", sets: [{w:"", r:"10", rir:"2"}, {w:"", r:"10", rir:"2"}, {w:"", r:"10", rir:"2"}, {w:"", r:"10", rir:"2"}] },
+        { name: "Forearm plank / leg raise", target: "3 sets", oneRM: "", sets: [{w:"BW", r:"", rir:""}, {w:"BW", r:"", rir:""}, {w:"BW", r:"", rir:""}] }
+      ],
+      "Custom blank": []
+    };
+
+    const $ = (id) => document.getElementById(id);
+    const state = {
+      date: todayISO(),
+      sessionName: "",
+      mode: "🟡 Maintain",
+      readiness: "Normal — RIR 2",
+      template: "Maintain A — push bias",
+      notes: "",
+      lifts: []
+    };
+
+    function todayISO() {
+      const d = new Date();
+      const local = new Date(d.getTime() - d.getTimezoneOffset() * 60000);
+      return local.toISOString().slice(0, 10);
+    }
+
+    function deepClone(x) { return JSON.parse(JSON.stringify(x)); }
+
+    function init() {
+      Object.keys(templates).forEach(name => {
+        const opt = document.createElement("option");
+        opt.value = name;
+        opt.textContent = name;
+        $("template").appendChild(opt);
+      });
+      const saved = loadSaved();
+      Object.assign(state, saved || state);
+      if (!state.lifts.length) loadTemplate(false);
+      bind();
+      renderAll();
+    }
+
+    function bind() {
+      ["date", "sessionName", "mode", "readiness", "template", "notes"].forEach(id => {
+        $(id).addEventListener("input", () => { state[id] = $(id).value; persist(); renderStats(); });
+      });
+      $("loadTemplate").addEventListener("click", () => {
+        if (state.lifts.length && !confirm("Replace current lifts with this template?")) return;
+        loadTemplate(true);
+      });
+      $("addLift").addEventListener("click", () => {
+        state.lifts.push({ name: "New lift", target: "", oneRM: "", sets: [{w:"", r:"", rir:""}] });
+        persist(); renderLifts(); renderStats();
+      });
+      $("copyMarkdown").addEventListener("click", copyMarkdown);
+      $("previewMarkdown").addEventListener("click", previewMarkdown);
+      $("saveDraft").addEventListener("click", () => { persist(); toast("Draft saved on this device."); });
+      $("resetSession").addEventListener("click", resetSession);
+    }
+
+    function loadTemplate(showToast) {
+      const name = state.template || $("template").value || "Maintain A — push bias";
+      state.template = name;
+      state.lifts = deepClone(templates[name] || []);
+      state.mode = modeForTemplate(name);
+      if (!state.sessionName || showToast) state.sessionName = name;
+      renderAll();
+      persist();
+      if (showToast) toast("Template loaded.");
+    }
+
+    function modeForTemplate(name) {
+      if (name.includes("Maintain")) return "🟡 Maintain";
+      if (name.includes("Return")) return "🔵 Return";
+      if (name.includes("Build")) return "🟢 Build";
+      return "Custom";
+    }
+
+    function renderAll() {
+      $("date").value = state.date;
+      $("sessionName").value = state.sessionName;
+      $("mode").value = state.mode;
+      $("readiness").value = state.readiness;
+      $("template").value = state.template;
+      $("notes").value = state.notes;
+      renderLifts();
+      renderStats();
+    }
+
+    function renderStats() {
+      const liftCount = state.lifts.length;
+      const setCount = state.lifts.reduce((n, l) => n + l.sets.filter(s => hasSet(s)).length, 0);
+      const bests = state.lifts.map(l => bestEstimate(l)).filter(x => x && x.estimate);
+      $("stats").innerHTML = `
+        <span class="pill">${liftCount} lifts</span>
+        <span class="pill">${setCount} logged sets</span>
+        <span class="pill">${state.mode}</span>
+        <span class="pill">${bests.length} 1RM estimates</span>
+      `;
+    }
+
+    function renderLifts() {
+      const root = $("lifts");
+      root.innerHTML = "";
+      state.lifts.forEach((lift, li) => {
+        const el = document.createElement("div");
+        el.className = "lift";
+        el.innerHTML = `
+          <div class="lift-head">
+            <div>
+              <input aria-label="Lift name" value="${escapeAttr(lift.name)}" data-li="${li}" data-field="name" />
+              <div class="row" style="margin-top:8px;">
+                <input aria-label="Target" placeholder="target e.g. 3×8" value="${escapeAttr(lift.target || "")}" data-li="${li}" data-field="target" />
+                <input aria-label="Calibrated 1RM" placeholder="calibrated 1RM" value="${escapeAttr(lift.oneRM || "")}" data-li="${li}" data-field="oneRM" />
+              </div>
+            </div>
+          </div>
+          <div class="sets"></div>
+          <div class="estimate" id="estimate-${li}"></div>
+          <div class="row4" style="margin-top:10px;">
+            <button class="ghost" data-action="add-set" data-li="${li}">+ Set</button>
+            <button class="ghost" data-action="repeat-set" data-li="${li}">Repeat</button>
+            <button class="ghost" data-action="clear-lift" data-li="${li}">Clear</button>
+            <button class="danger" data-action="delete-lift" data-li="${li}">Delete</button>
+          </div>
+        `;
+        root.appendChild(el);
+        const setsRoot = el.querySelector(".sets");
+        lift.sets.forEach((set, si) => setsRoot.appendChild(renderSet(li, si, set)));
+        updateEstimate(li);
+      });
+      root.querySelectorAll("input").forEach(inp => {
+        inp.addEventListener("input", (e) => {
+          const li = Number(e.target.dataset.li);
+          const si = e.target.dataset.si === undefined ? null : Number(e.target.dataset.si);
+          const field = e.target.dataset.field;
+          if (si === null) state.lifts[li][field] = e.target.value;
+          else state.lifts[li].sets[si][field] = e.target.value;
+          updateEstimate(li); persist(); renderStats();
+        });
+      });
+      root.querySelectorAll("button[data-action]").forEach(btn => btn.addEventListener("click", handleLiftAction));
+    }
+
+    function renderSet(li, si, set) {
+      const div = document.createElement("div");
+      div.className = "set";
+      div.innerHTML = `
+        <div><label>Weight</label><input inputmode="decimal" placeholder="60 / BW / Red" value="${escapeAttr(set.w || "")}" data-li="${li}" data-si="${si}" data-field="w"></div>
+        <div><label>Reps</label><input inputmode="decimal" placeholder="8 / 8/leg / 40s" value="${escapeAttr(set.r || "")}" data-li="${li}" data-si="${si}" data-field="r"></div>
+        <div><label>RIR</label><input inputmode="decimal" placeholder="2" value="${escapeAttr(set.rir || "")}" data-li="${li}" data-si="${si}" data-field="rir"></div>
+        <button class="ghost" data-action="delete-set" data-li="${li}" data-si="${si}">×</button>
+      `;
+      return div;
+    }
+
+    function handleLiftAction(e) {
+      const action = e.currentTarget.dataset.action;
+      const li = Number(e.currentTarget.dataset.li);
+      const si = e.currentTarget.dataset.si === undefined ? null : Number(e.currentTarget.dataset.si);
+      const lift = state.lifts[li];
+      if (!lift) return;
+      if (action === "add-set") lift.sets.push({w:"", r:"", rir:""});
+      if (action === "repeat-set") lift.sets.push(deepClone(lift.sets[lift.sets.length - 1] || {w:"", r:"", rir:""}));
+      if (action === "clear-lift") lift.sets = [{w:"", r:"", rir:""}];
+      if (action === "delete-lift") state.lifts.splice(li, 1);
+      if (action === "delete-set") lift.sets.splice(si, 1);
+      persist(); renderLifts(); renderStats();
+    }
+
+    function hasSet(s) { return (s.w || s.r || s.rir); }
+    function num(x) {
+      const m = String(x || "").match(/-?\d+(\.\d+)?/);
+      return m ? Number(m[0]) : NaN;
+    }
+    function estimate1RM(w, reps, rir) {
+      const weight = num(w), r = num(reps), reserve = num(rir || 0);
+      if (!isFinite(weight) || !isFinite(r) || weight <= 0 || r <= 0) return null;
+      const total = r + (isFinite(reserve) ? reserve : 0);
+      return weight * (1 + total / 30); // Epley with reps + RIR proxy
+    }
+    function bestEstimate(lift) {
+      let best = null;
+      for (const s of lift.sets) {
+        const est = estimate1RM(s.w, s.r, s.rir);
+        if (est && (!best || est > best.estimate)) best = { estimate: est, set: s };
+      }
+      return best;
+    }
+    function fmtEst(x) {
+      if (!x) return "";
+      const rounded = Math.round(x * 2) / 2;
+      return String(rounded).replace(/\.0$/, "");
+    }
+    function updateEstimate(li) {
+      const lift = state.lifts[li];
+      const node = $("estimate-" + li);
+      if (!lift || !node) return;
+      const best = bestEstimate(lift);
+      node.textContent = best ? `Best 1RM-eq: ${fmtEst(best.estimate)} from ${formatSet(best.set)}` : "No numeric 1RM estimate yet.";
+    }
+
+    function formatSet(s) {
+      const parts = [];
+      if (s.w) parts.push(s.w);
+      if (s.r) parts.push("× " + s.r);
+      if (s.rir) parts.push("× RIR " + s.rir);
+      return parts.join(" ").trim() || "—";
+    }
+    function compactSets(sets) {
+      const real = sets.filter(hasSet).map(formatSet);
+      if (!real.length) return "—";
+      const counts = new Map();
+      real.forEach(x => counts.set(x, (counts.get(x) || 0) + 1));
+      if (counts.size === 1 && real.length > 1) return `${real[0]} (×${real.length})`;
+      return real.join(", ");
+    }
+    function markdown() {
+      const title = `${state.date} — ${state.sessionName || state.template || "Workout"}`;
+      const rows = state.lifts.map(lift => {
+        const best = bestEstimate(lift);
+        const est = best ? fmtEst(best.estimate) : "n/a";
+        const calibrated = lift.oneRM ? lift.oneRM : "—";
+        return `| ${cleanCell(lift.name)} | ${cleanCell(compactSets(lift.sets))} | ${cleanCell(est)} | ${cleanCell(calibrated)} |`;
+      }).join("\n");
+      const notes = state.notes.trim() ? `\n\n**Notes:**\n${state.notes.trim().split(/\n+/).map(line => `- ${line}`).join("\n")}` : "";
+      return `### ${title}\n\n${state.mode}; ${state.readiness}. Logged via vault-local workout logger.\n\n| Lift | Sets | 1RM-eq | Calibrated 1RM |\n|---|---|---|---|\n${rows}${notes}\n`;
+    }
+    function cleanCell(x) { return String(x || "").replace(/\|/g, "/").replace(/\n/g, " "); }
+    function previewMarkdown() {
+      const out = markdown();
+      $("markdownOut").value = out;
+      $("copyArea").classList.remove("hidden");
+      $("markdownOut").focus();
+      $("markdownOut").select();
+    }
+    async function copyMarkdown() {
+      const out = markdown();
+      $("markdownOut").value = out;
+      $("copyArea").classList.remove("hidden");
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(out);
+        } else {
+          $("markdownOut").focus();
+          $("markdownOut").select();
+          document.execCommand("copy");
+        }
+        toast("Markdown copied. Paste into the top of the workout log under Sessions.");
+      } catch (err) {
+        $("markdownOut").focus();
+        $("markdownOut").select();
+        toast("Clipboard blocked. Export text is selected — copy it manually.", true);
+      }
+    }
+    function resetSession() {
+      if (!confirm("Clear this workout draft?")) return;
+      localStorage.removeItem(STORAGE_KEY);
+      Object.assign(state, { date: todayISO(), sessionName: "", mode: "🟡 Maintain", readiness: "Normal — RIR 2", template: "Maintain A — push bias", notes: "", lifts: [] });
+      loadTemplate(false);
+      toast("Session reset.");
+    }
+    function persist() {
+      state.date = $("date")?.value || state.date;
+      state.sessionName = $("sessionName")?.value || state.sessionName;
+      state.mode = $("mode")?.value || state.mode;
+      state.readiness = $("readiness")?.value || state.readiness;
+      state.template = $("template")?.value || state.template;
+      state.notes = $("notes")?.value || state.notes;
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }
+    function loadSaved() {
+      try { return JSON.parse(localStorage.getItem(STORAGE_KEY)); } catch { return null; }
+    }
+    function toast(msg, warn) {
+      const el = $("toast");
+      el.textContent = msg;
+      el.classList.remove("hidden");
+      el.style.background = warn ? "#422006" : "#052e16";
+      el.style.color = warn ? "#fef3c7" : "#dcfce7";
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(() => el.classList.add("hidden"), 3200);
+    }
+    function escapeAttr(str) {
+      return String(str || "").replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    }
+
+    init();
+  </script>
+</body>
+</html>

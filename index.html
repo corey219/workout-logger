@@ -127,6 +127,16 @@
     .set:first-of-type { border-top: 0; }
     .set label { margin-bottom: 4px; font-size: 10px; }
     .set button { min-height: 42px; width: 42px; padding: 0; }
+    .rest-hint {
+      grid-column: 1 / -1;
+      color: #bae6fd;
+      background: rgba(56,189,248,.08);
+      border: 1px solid rgba(56,189,248,.18);
+      border-radius: 12px;
+      padding: 7px 9px;
+      font-size: 12px;
+      font-weight: 800;
+    }
     .muted { color: var(--muted); }
     .small { font-size: 12px; }
     .estimate { color: #bae6fd; font-size: 12px; margin-top: 8px; }
@@ -227,7 +237,7 @@
         </div>
         <details>
           <summary>How to install on phone</summary>
-          <p class="small muted">Open this file from Obsidian/iCloud/Files in Safari, then Share → Add to Home Screen. It still saves drafts locally on that browser/device.</p>
+          <p class="small muted">Open the hosted URL on your phone, then Safari/Chrome → Share → Add to Home Screen. It saves drafts locally on that browser/device.</p>
         </details>
       </section>
     </main>
@@ -433,7 +443,7 @@
           const field = e.target.dataset.field;
           if (si === null) state.lifts[li][field] = e.target.value;
           else state.lifts[li].sets[si][field] = e.target.value;
-          updateEstimate(li); persist(); renderStats();
+          updateEstimate(li); updateRestHint(li, si); persist(); renderStats();
         });
       });
       root.querySelectorAll("button[data-action]").forEach(btn => btn.addEventListener("click", handleLiftAction));
@@ -442,11 +452,13 @@
     function renderSet(li, si, set) {
       const div = document.createElement("div");
       div.className = "set";
+      const lift = state.lifts[li] || {};
       div.innerHTML = `
         <div><label>Weight</label><input inputmode="decimal" placeholder="60 / BW / Red" value="${escapeAttr(set.w || "")}" data-li="${li}" data-si="${si}" data-field="w"></div>
         <div><label>Reps</label><input inputmode="decimal" placeholder="8 / 8/leg / 40s" value="${escapeAttr(set.r || "")}" data-li="${li}" data-si="${si}" data-field="r"></div>
         <div><label>RIR</label><input inputmode="decimal" placeholder="2" value="${escapeAttr(set.rir || "")}" data-li="${li}" data-si="${si}" data-field="rir"></div>
         <button class="ghost" data-action="delete-set" data-li="${li}" data-si="${si}">×</button>
+        <div class="rest-hint" id="rest-${li}-${si}">Suggested rest before next set: ${escapeAttr(suggestedRest(lift, set, si))}</div>
       `;
       return div;
     }
@@ -463,6 +475,22 @@
       if (action === "delete-lift") state.lifts.splice(li, 1);
       if (action === "delete-set") lift.sets.splice(si, 1);
       persist(); renderLifts(); renderStats();
+    }
+
+    function suggestedRest(lift, set, setIndex) {
+      const name = String(lift.name || "").toLowerCase();
+      const target = String(lift.target || "").toLowerCase();
+      const reserve = num(set.rir);
+      const hardSet = isFinite(reserve) && reserve <= 1;
+      const isLegCompound = /leg press|hack squat|hip thrust|glute drive|rdl/.test(name);
+      const isCompound = isLegCompound || /chest press|press$|machine press|row|pulldown|squat/.test(name);
+      const isSmallIsolation = /lateral raise|face pull|rear delt|curl|tricep|pressdown|extension|pec deck|fly|pullover|calf|pallof|anti-rotation|plank|mobility/.test(name);
+
+      if (isLegCompound) return hardSet ? "2:30–3:00" : "2:00–2:30";
+      if (isCompound) return hardSet ? "2:00–2:30" : "2:00";
+      if (isSmallIsolation) return hardSet ? "90s" : "60–90s";
+      if (/15|20/.test(target)) return hardSet ? "90s" : "60–90s";
+      return "90–120s";
     }
 
     function hasSet(s) { return (s.w || s.r || s.rir); }
@@ -495,6 +523,14 @@
       if (!lift || !node) return;
       const best = bestEstimate(lift);
       node.textContent = best ? `Best 1RM-eq: ${fmtEst(best.estimate)} from ${formatSet(best.set)}` : "No numeric 1RM estimate yet.";
+    }
+    function updateRestHint(li, si) {
+      if (si === null || si === undefined) return;
+      const lift = state.lifts[li];
+      const set = lift?.sets?.[si];
+      const node = $("rest-" + li + "-" + si);
+      if (!lift || !set || !node) return;
+      node.textContent = "Suggested rest before next set: " + suggestedRest(lift, set, si);
     }
 
     function formatSet(s) {

@@ -7,6 +7,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-title" content="Workout Logger" />
   <title>Workout Logger</title>
+  <meta name="app-version" content="friday-maintenance-no-machines-2026-06-26" />
   <style>
     :root {
       --bg: #0b1020;
@@ -250,6 +251,17 @@
     const STORAGE_KEY = "corey-workout-logger-v1";
 
     const templates = {
+      "Friday Maintenance — no machines": [
+        { name: "Warm-up circuit", target: "2 rounds: squats/push-ups/hinges/plank/lunges", oneRM: "", sets: [{w:"BW", r:"done", rir:"4"}] },
+        { name: "Goblet squat / slow BW squat", target: "3×8–12", oneRM: "", sets: [{w:"", r:"10", rir:"3"}, {w:"", r:"10", rir:"3"}, {w:"", r:"10", rir:"2"}] },
+        { name: "Push-ups / incline push-ups", target: "3×8–15", oneRM: "", sets: [{w:"BW", r:"10", rir:"3"}, {w:"BW", r:"10", rir:"3"}, {w:"BW", r:"10", rir:"2"}] },
+        { name: "DB/backpack RDL or single-leg RDL", target: "3×8–12", oneRM: "", sets: [{w:"", r:"10", rir:"3"}, {w:"", r:"10", rir:"3"}, {w:"", r:"10", rir:"2"}] },
+        { name: "1-arm DB/backpack row", target: "3×10–12/side", oneRM: "", sets: [{w:"", r:"10/side", rir:"3"}, {w:"", r:"10/side", rir:"3"}, {w:"", r:"10/side", rir:"2"}] },
+        { name: "Reverse lunge", target: "2–3×8–10/side", oneRM: "", sets: [{w:"BW", r:"8/side", rir:"3"}, {w:"BW", r:"8/side", rir:"3"}] },
+        { name: "Side plank", target: "2×25–40s/side", oneRM: "", sets: [{w:"BW", r:"30s/side", rir:""}, {w:"BW", r:"30s/side", rir:""}] },
+        { name: "Dead bug", target: "2×8–10/side", oneRM: "", sets: [{w:"BW", r:"8/side", rir:""}, {w:"BW", r:"8/side", rir:""}] },
+        { name: "Optional easy finisher", target: "6 min EMOM: squats + burpees/mountain climbers", oneRM: "", sets: [{w:"BW", r:"optional", rir:"3"}] }
+      ],
       "Maintain A — push bias": [
         { name: "Banded face pulls", target: "2×15", oneRM: "", sets: [{w:"Red", r:"15", rir:"3"}, {w:"Red", r:"15", rir:"3"}] },
         { name: "Flat DB press", target: "2×8", oneRM: "80", sets: [{w:"60", r:"8", rir:"2"}, {w:"60", r:"8", rir:"2"}] },
@@ -320,7 +332,7 @@
       sessionName: "",
       mode: "🟡 Maintain",
       readiness: "Normal — RIR 2",
-      template: "Maintain A — push bias",
+      template: "Friday Maintenance — no machines",
       notes: "",
       lifts: []
     };
@@ -589,7 +601,7 @@
     function resetSession() {
       if (!confirm("Clear this workout draft?")) return;
       localStorage.removeItem(STORAGE_KEY);
-      Object.assign(state, { date: todayISO(), sessionName: "", mode: "🟡 Maintain", readiness: "Normal — RIR 2", template: "Maintain A — push bias", notes: "", lifts: [] });
+      Object.assign(state, { date: todayISO(), sessionName: "", mode: "🟡 Maintain", readiness: "Normal — RIR 2", template: "Friday Maintenance — no machines", notes: "", lifts: [] });
       loadTemplate(false);
       toast("Session reset.");
     }

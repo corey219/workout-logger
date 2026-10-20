@@ -847,19 +847,22 @@ function formatRestLabel(seconds) {
 // ============================================================================
 let state = loadState();
 
+function withBaselines(oneRMs) {
+  Object.entries(MIN_1RM_BASELINE).forEach(([liftId, value]) => {
+    if (oneRMs[liftId] == null || Number(oneRMs[liftId]) < value) {
+      oneRMs[liftId] = value;
+    }
+  });
+  return oneRMs;
+}
+
 function loadState() {
   try {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved) {
       const parsed = JSON.parse(saved);
-      const oneRMs = { ...DEFAULT_1RM, ...(parsed.oneRMs || {}) };
-      Object.entries(MIN_1RM_BASELINE).forEach(([liftId, value]) => {
-        if (oneRMs[liftId] == null || Number(oneRMs[liftId]) < value) {
-          oneRMs[liftId] = value;
-        }
-      });
       return {
-        oneRMs,
+        oneRMs: withBaselines({ ...DEFAULT_1RM, ...(parsed.oneRMs || {}) }),
         sessions: parsed.sessions || {},
         currentSession: parsed.currentSession || 'upper-power',
         currentPhase: parsed.currentPhase || '1',
@@ -867,7 +870,7 @@ function loadState() {
     }
   } catch(e) { console.error(e); }
   return {
-    oneRMs: { ...DEFAULT_1RM },
+    oneRMs: withBaselines({ ...DEFAULT_1RM }),
     sessions: {},
     currentSession: 'upper-power',
     currentPhase: '1',
@@ -875,7 +878,9 @@ function loadState() {
 }
 
 function saveState() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  } catch(e) { console.error(e); }
 }
 
 function todayKey() {

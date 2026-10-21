@@ -426,9 +426,9 @@ const MIN_1RM_BASELINE = {
   'hammer-curl': 21.5,
   'tricep-ext': 18.5,       // 10/20: 12.5×12×RIR2
   'lateral-raise': 19,      // 9/15: 12.5×14×RIR2
-  'hip-thrust': 120,        // 10/12: 80×12×RIR3
+  'hip-thrust': 122,        // 10/21: 85×10×RIR3
   'single-leg-rdl': 20.5,   // confirmed multiple sessions
-  'bulgarian-split-squat': 28, // 9/24: 20×10×RIR2
+  'bulgarian-split-squat': 28.5, // 10/21: 20×11×RIR2
   'db-pullover': 50,        // 10/20: 35×10×RIR3 (flare load cleared)
 };
 
@@ -490,11 +490,11 @@ const SESSIONS = {
     title: 'Lower Power',
     phases: {
       '1': [
-        { id: 'hip-thrust', name: 'Hip thrust (main lower lift)', sets: 4, reps: 10, rir: 2, rest: 150, equipment: 'kettlebell', overrideTarget: 85, note: '85 EARNED 10/12 (4x12 at 80, RIR 3-4, on an easy-effort day). 80 + 4 magnets. Start after the easy week: 4x10, build to 12. Pre-lift: 5 min hamstring mobility.' },
+        { id: 'hip-thrust', name: 'Hip thrust (main lower lift)', sets: 4, reps: 11, rir: 2, rest: 150, equipment: 'kettlebell', overrideTarget: 85, note: '85 debut 10/21: 4x10 at RIR 3 (1RM 122). Build 11 -> 12 at 85, then 90. Pre-lift: 5 min hamstring mobility + one ramp set at 60.' },
         { id: 'rdl', name: 'Romanian deadlift (DBs)', sets: 3, reps: 8, rir: 3, rest: 120, overrideTarget: 40, note: 'Mobility-gated: progress DEPTH + slow eccentric. Two months at RIR 4 — if depth now reaches mid-shin with a flat back, use 42.5 (40 + 2 magnets/hand).' },
-        { id: 'bulgarian-split-squat', name: 'BSS — 20 lb', sets: 3, reps: 11, rir: 2, rest: 90, overrideTarget: 20, note: '3x10 clean left-first on 10/7. Now 3x11. Warm-up set per leg (BW x5) before set 1. LEFT LEG FIRST, right matches. Then 12, then 25. Knee rule applies.' },
-        { id: 'standing-calf', name: 'Standing calf raise — HOLD DBs', sets: 4, reps: 15, rir: 1, rest: 60, equipment: 'bodyweight', note: '4x14 at RIR 2-3 on 10/7. 4x15 earns 35. Full stretch at bottom.' },
-        { id: 'ab-rollout', name: 'Ab wheel rollout (from knees)', sets: 3, reps: 8, rir: 2, rest: 60, equipment: 'bodyweight', note: '7s at RIR 2-3 on 10/7. Next 8s. Stay inside the chest-pull-free range, add an inch of reach. Pelvis tucked, ribs down. Towel under knees.' },
+        { id: 'bulgarian-split-squat', name: 'BSS — 20 lb', sets: 3, reps: 12, rir: 2, rest: 90, overrideTarget: 20, note: '3x11 clean left-first on 10/21. Now 3x12, then 25. Warm-up set per leg first. LEFT LEG FIRST, right matches. Knee rule applies.' },
+        { id: 'standing-calf', name: 'Standing calf raise — HOLD DBs', sets: 4, reps: 12, rir: 1, rest: 60, equipment: 'bodyweight', note: '35 EARNED 10/21 (4x15 at 30). 35 = 30 + all 4 magnets — move them over from the hip thrust. Restart at 12s, build to 15. Type the weight in.' },
+        { id: 'ab-rollout', name: 'Ab wheel rollout (from knees)', sets: 3, reps: 9, rir: 2, rest: 60, equipment: 'bodyweight', note: '8s at RIR 2 on 10/21. Next 9s, or same reps with an inch more reach. Pelvis tucked, ribs down; stop short of the chest pull.' },
       ],
       '2': [
         { id: 'front-squat', name: 'Front squat', sets: 4, reps: 5, rir: 1, rest: 210, equipment: 'barbell' },
@@ -611,11 +611,11 @@ const SESSIONS = {
     title: 'Lower 45-min (alternating pairs)',
     phases: {
       '1': [
-        { id: 'hip-thrust', name: 'A1 · Hip thrust', sets: 4, reps: 10, rir: 2, rest: 75, equipment: 'kettlebell', overrideTarget: 85, note: '85 earned 10/12 (80 + 4 magnets). 4x10, build to 12. Alternate with A2 — the RDL IS your rest.' },
+        { id: 'hip-thrust', name: 'A1 · Hip thrust', sets: 4, reps: 11, rir: 2, rest: 75, equipment: 'kettlebell', overrideTarget: 85, note: 'Build 11 -> 12 at 85, then 90. Alternate with A2 — the RDL IS your rest.' },
         { id: 'rdl', name: 'A2 · Romanian deadlift (DBs)', sets: 3, reps: 8, rir: 3, rest: 75, overrideTarget: 40, note: 'Depth + slow eccentric, load parked. RIR reads high — correct. Alternate with A1.' },
-        { id: 'bulgarian-split-squat', name: 'B1 · BSS — 20 lb', sets: 3, reps: 11, rir: 2, rest: 75, overrideTarget: 20, note: '3x10 clean 10/7 — now 3x11. LEFT LEG FIRST, warm-up set per leg before set 1. Knee rule applies. Alternate with B2.' },
-        { id: 'standing-calf', name: 'B2 · Standing calf raise — HOLD DBs', sets: 4, reps: 15, rir: 1, rest: 60, equipment: 'bodyweight', note: '30 DB; build to 4x15, then 35 (type it in). Alternate with B1.' },
-        { id: 'ab-rollout', name: 'C · Ab wheel rollout (from knees)', sets: 2, reps: 8, rir: 2, rest: 45, equipment: 'bodyweight', note: 'Stay inside the chest-pull-free range (9/24). Pelvis tucked, ribs down. Trimmed to 2 sets for time — skip if the clock runs out.' },
+        { id: 'bulgarian-split-squat', name: 'B1 · BSS — 20 lb', sets: 3, reps: 12, rir: 2, rest: 75, overrideTarget: 20, note: '3x12, then 25. LEFT LEG FIRST, warm-up set per leg first. Knee rule applies. Alternate with B2.' },
+        { id: 'standing-calf', name: 'B2 · Standing calf raise — HOLD DBs', sets: 4, reps: 12, rir: 1, rest: 60, equipment: 'bodyweight', note: '35 (30 + 4 magnets; type it in). Build 12 -> 15. Alternate with B1.' },
+        { id: 'ab-rollout', name: 'C · Ab wheel rollout (from knees)', sets: 2, reps: 9, rir: 2, rest: 45, equipment: 'bodyweight', note: 'Pain-free range. Skip if the clock runs out.' },
       ],
       '2': [],
       '3': [],

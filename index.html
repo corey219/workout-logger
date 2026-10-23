@@ -419,17 +419,17 @@ const DEFAULT_1RM = {
 // loadState() lifts stored values up to these — protects against RIR-capped
 // sessions having down-clobbered calibrations before the asymmetric-update fix.
 const MIN_1RM_BASELINE = {
-  'seated-db-press': 43.5,  // 10/20: 32.5×8×RIR2
+  'seated-db-press': 44.5,  // 10/23: 32.5×9×RIR2
   'flat-db-press': 85.5,    // 8/31: 62.5×8×RIR3
   'cs-db-row': 70,          // 10/6: 52.5×8×RIR2
   'db-curl': 28.5,          // 10/6: 20×11×RIR2
   'hammer-curl': 21.5,
   'tricep-ext': 18.5,       // 10/20: 12.5×12×RIR2
-  'lateral-raise': 19,      // 9/15: 12.5×14×RIR2
+  'lateral-raise': 20,      // 10/23: 12.5×16×RIR2
   'hip-thrust': 122,        // 10/21: 85×10×RIR3
   'single-leg-rdl': 20.5,   // confirmed multiple sessions
   'bulgarian-split-squat': 28.5, // 10/21: 20×11×RIR2
-  'db-pullover': 50,        // 10/20: 35×10×RIR3 (flare load cleared)
+  'db-pullover': 51.5,      // 10/23: 35×11×RIR3
 };
 
 // ============================================================================
@@ -456,13 +456,13 @@ const SESSIONS = {
     phases: {
       '1': [
         { id: 'face-pull', name: 'Banded face pulls (pre-lift activation)', sets: 3, reps: 15, rir: 2, rest: 45, equipment: 'band', note: 'Activation — strict, light, full ROM. Warm-up push-ups go ON DB HANDLES or fists (neutral wrist): flat-palm push-ups bother the wrists (10/6).' },
-        { id: 'tricep-ext', name: 'Overhead DB triceps extension', sets: 3, reps: 10, rir: 2, rest: 75, overrideTarget: 13.75, note: '3x12 at 12.5 done 10/20. 13.75 = 10 lb DB + 3 magnets. Build 10 -> 12, then 15.' },
-        { id: 'seated-db-press', name: 'Seated DB press', sets: 4, reps: 9, rir: 2, rest: 180, overrideTarget: 32.5, note: '32.5 debut clean 10/20 (3x8 at RIR 2). Build 8 -> 10 at 32.5, then 35.' },
-        { id: 'flat-db-press', name: 'Flat DB press — rep build', sets: 4, reps: 8, rir: 2, rest: 180, overrideTarget: 62.5, note: '10/11: 8/8/8/6 — order fix helped, set 4 still fades. Own 4x8 at RIR 2, then build to 10-12, then 70 x 6-8.' },
-        { id: 'db-pullover', name: 'DB pullover — 35', sets: 3, reps: 11, rir: 2, rest: 90, overrideTarget: 35, note: '35 (its old flare load) cleared 10/20. Elbow rebuild complete. Build 10 -> 12 at 35, then 40.' },
-        { id: 'cs-db-row', name: '1-arm DB row', sets: 4, reps: 9, rir: 2, rest: 120, overrideTarget: 50, note: 'Back to 50 (52.5 read RIR 1 across on 10/20). Build 8 -> 10 at 50, then 52.5 x 8. RIGHT ARM FIRST.' },
-        { id: 'lateral-raise', name: 'SUPERSET 1 · DB lateral raise — 12.5s', sets: 3, reps: 16, rir: 2, rest: 45, overrideTarget: 12.5, note: '3x15 done 10/20 but at RIR 0-1. Next 3x16 — stop at RIR 1-2. Building toward 18, then 15 lb. Superset with curls.' },
-        { id: 'db-curl', name: 'SUPERSET 2 · DB curl', sets: 3, reps: 10, rir: 2, rest: 60, overrideTarget: 20, note: 'HARD STOP AT RIR 2 on sets 1-2. Set 3 has collapsed 3 times (latest 11/11/6) — always after set 2 went to failure. 3x10 clean first, then 11, 12.' },
+        { id: 'tricep-ext', name: 'Overhead DB triceps extension', sets: 3, reps: 10, rir: 2, rest: 75, overrideTarget: 13.75, note: '12.5 read RIR 4 on 10/23 — 13.75 (10 lb DB + 3 magnets) is due. Build 10 -> 12, then 15.' },
+        { id: 'seated-db-press', name: 'Seated DB press', sets: 4, reps: 10, rir: 2, rest: 180, overrideTarget: 32.5, note: '4x9 at RIR 2 on 10/23. 4x10 earns 35.' },
+        { id: 'flat-db-press', name: 'Flat DB press — rep build', sets: 4, reps: 9, rir: 2, rest: 180, overrideTarget: 62.5, note: 'First clean 4x8 since 9/15 (10/23). Build 9 -> 10-12 at 62.5, then 70 x 6-8.' },
+        { id: 'db-pullover', name: 'DB pullover — 35', sets: 3, reps: 12, rir: 2, rest: 90, overrideTarget: 35, note: '3x11 at RIR 3 on 10/23. 3x12 next, then 40.' },
+        { id: 'cs-db-row', name: '1-arm DB row', sets: 4, reps: 10, rir: 2, rest: 120, overrideTarget: 50, note: '9/9/9/8 at RIR 2 on 10/23. 4x10 at 50, then 52.5 x 8. RIGHT ARM FIRST.' },
+        { id: 'lateral-raise', name: 'SUPERSET 1 · DB lateral raise — 12.5s (adjustables)', sets: 3, reps: 17, rir: 2, rest: 45, overrideTarget: 12.5, note: '3x16 on 10/23. 3x17 next, toward 18, then 15. Adjustables stay at 12.5 — no re-notching. Rest ~45s, then curls.' },
+        { id: 'db-curl', name: 'SUPERSET 2 · DB curl — fixed 15s, 3-sec lowering', sets: 3, reps: 9, rir: 2, rest: 90, overrideTarget: 15, note: 'Fixed 15s, slow 3-second lowering every rep (10/23 start: 10/7/7). Rest 90s after curls before the next lateral set. Target 3x8-10, build to 3x12. RIR 2 on sets 1-2.' },
       ],
       '2': [
         { id: 'face-pull', name: 'Banded face pulls (activation)', sets: 3, reps: 15, rir: 2, rest: 45, equipment: 'band' },
@@ -596,12 +596,12 @@ const SESSIONS = {
     phases: {
       '1': [
         { id: 'tricep-ext', name: '0 · Overhead DB triceps extension (first)', sets: 3, reps: 10, rir: 2, rest: 60, overrideTarget: 13.75, note: '13.75 = 10 lb DB + 3 magnets. Build 10 -> 12. Straight sets, before the pairs.' },
-        { id: 'seated-db-press', name: 'A1 · Seated DB press', sets: 3, reps: 9, rir: 2, rest: 75, overrideTarget: 32.5, note: 'Build 8 -> 10 at 32.5. Alternate with A2 (row) — the row IS your rest.' },
-        { id: 'cs-db-row', name: 'A2 · 1-arm DB row', sets: 3, reps: 9, rir: 2, rest: 75, overrideTarget: 50, note: 'Back to 50; build 8 -> 10, then 52.5. Right arm first. Alternate with A1.' },
-        { id: 'flat-db-press', name: 'B1 · Flat DB press — rep build', sets: 3, reps: 8, rir: 2, rest: 75, overrideTarget: 62.5, note: 'Gate met 9/15. 65 does not exist on the rack — build reps 8 -> 10-12, then 70 x 6-8. Alternate with B2.' },
-        { id: 'db-pullover', name: 'B2 · DB pullover — 35', sets: 3, reps: 11, rir: 2, rest: 75, overrideTarget: 35, note: 'Flare load cleared 10/20. Build 10 -> 12 at 35. Alternate with B1.' },
-        { id: 'lateral-raise', name: 'C1 · DB lateral raise — 12.5s', sets: 3, reps: 16, rir: 2, rest: 45, overrideTarget: 12.5, note: 'Next 3x16, stop at RIR 1-2. Alternate with C2.' },
-        { id: 'db-curl', name: 'C2 · DB curl', sets: 3, reps: 10, rir: 2, rest: 60, overrideTarget: 20, note: 'HARD STOP AT RIR 2 on sets 1-2 — set 3 keeps collapsing after a failure set. 3x10 clean first. Alternate with C1.' },
+        { id: 'seated-db-press', name: 'A1 · Seated DB press', sets: 3, reps: 10, rir: 2, rest: 75, overrideTarget: 32.5, note: '3x10 at 32.5 earns 35. Alternate with A2 (row) — the row IS your rest.' },
+        { id: 'cs-db-row', name: 'A2 · 1-arm DB row', sets: 3, reps: 10, rir: 2, rest: 75, overrideTarget: 50, note: '3x10 at 50, then 52.5. Right arm first. Alternate with A1.' },
+        { id: 'flat-db-press', name: 'B1 · Flat DB press — rep build', sets: 3, reps: 9, rir: 2, rest: 75, overrideTarget: 62.5, note: 'Build 9 -> 10-12 at 62.5, then 70. Alternate with B2.' },
+        { id: 'db-pullover', name: 'B2 · DB pullover — 35', sets: 3, reps: 12, rir: 2, rest: 75, overrideTarget: 35, note: '3x12 at 35, then 40. Alternate with B1.' },
+        { id: 'lateral-raise', name: 'C1 · DB lateral raise — 12.5s (adjustables)', sets: 3, reps: 17, rir: 2, rest: 45, overrideTarget: 12.5, note: '3x17 next. Adjustables stay at 12.5. Alternate with C2.' },
+        { id: 'db-curl', name: 'C2 · DB curl — fixed 15s, 3-sec lowering', sets: 3, reps: 9, rir: 2, rest: 90, overrideTarget: 15, note: 'Fixed 15s, 3-second lowering. 3x8-10, build to 12. 90s rest before the next lateral set.' },
       ],
       '2': [],
       '3': [],

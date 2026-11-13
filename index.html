@@ -426,9 +426,9 @@ const MIN_1RM_BASELINE = {
   'hammer-curl': 21.5,
   'tricep-ext': 21,         // 11/8: 15×8×RIR4 (one arm)
   'lateral-raise': 21,      // 11/11: 12.5×18×RIR2
-  'hip-thrust': 135,        // 11/10: 90×12×RIR3
+  'hip-thrust': 142.5,      // 11/13: barbell 95×10×RIR5 (soft)
   'single-leg-rdl': 20.5,   // confirmed multiple sessions
-  'bulgarian-split-squat': 35.5, // 11/10: 25×11×RIR2
+  'bulgarian-split-squat': 36, // 11/13: 25×11×RIR2
   'db-pullover': 57.5,      // 11/4: 40×10×RIR3
   'rdl': 61.5,             // 11/5: 45×8×RIR3
 };
@@ -491,11 +491,11 @@ const SESSIONS = {
     title: 'Lower Power',
     phases: {
       '1': [
-        { id: 'hip-thrust', name: 'Hip thrust — BARBELL', sets: 4, reps: 10, rir: 2, rest: 150, equipment: 'barbell', overrideTarget: 95, note: 'DB range finished 11/10 (4x12 at 90). Barbell ~95 total (45 bar + two 25s). 10s, build to 12, then +10. Pad the bar (towel or mat). Bench edge under the shoulder blades, chin tucked, eyes on your knees at the top, ribs down - squeeze glutes, do not arch. Ramp: bar x8, 75 x5.' },
-        { id: 'rdl', name: 'Romanian deadlift (DBs) — 45', sets: 3, reps: 8, rir: 3, rest: 120, overrideTarget: 45, note: 'BACK RETURN: skipped 11/10 after the 11/8 tweak. Only if bending and twisting are pain-free. 3x8 at RIR 3, no grinding. Any back signal -> stop, do glute bridges instead.' },
-        { id: 'bulgarian-split-squat', name: 'BSS — 25 lb', sets: 3, reps: 11, rir: 2, rest: 90, overrideTarget: 25, note: '11/9/11 on 11/10 (set 2 cramp). Hold 11s, build to 12, then 30. LEFT LEG FIRST, warm-up set per leg. BACK FOOT: TOES TUCKED (ball of the foot on the bench, shoe on) - laces-down points the foot and cramps it. Salt/electrolytes before.' },
-        { id: 'standing-calf', name: 'Standing calf raise — HOLD 45 DB', sets: 4, reps: 14, rir: 2, rest: 60, equipment: 'bodyweight', note: '45 x12 easy on 11/10. 4x14 next, then 15. Last set may go to failure. Type 45 in.' },
-        { id: 'ab-rollout', name: 'Ab wheel rollout (from knees) — shorter reach', sets: 3, reps: 10, rir: 2, rest: 60, equipment: 'bodyweight', note: 'Back-safe at the shorter reach on 11/10. Extend the reach a little at a time as the back clears. Pelvis tucked, never let the low back sag.' },
+        { id: 'hip-thrust', name: 'Hip thrust — BARBELL 105', sets: 4, reps: 10, rir: 2, rest: 150, equipment: 'barbell', overrideTarget: 105, note: '95 x10 at RIR 5 on 11/13 - too light. 105 total (45 bar + 25s + 5s). No 5-lb plates -> stay at 95 and do 4x12. Build 10s to 12, then +10. Pad the bar (new pad, or towel/mat until it arrives). Bench edge under the shoulder blades, chin tucked, eyes on your knees at the top, ribs down - squeeze glutes, do not arch. Ramp: bar x8, 75 x5.' },
+        { id: 'rdl', name: 'Romanian deadlift (DBs) — 45', sets: 3, reps: 9, rir: 2, rest: 120, overrideTarget: 45, note: 'Back return went clean 11/13 (3x8 at RIR 3). 3x9 now, stop at 2 reps left, no grinding. If the back was sore the day after, stay at 8. Any back signal -> stop, glute bridges instead.' },
+        { id: 'bulgarian-split-squat', name: 'BSS — 25 lb', sets: 3, reps: 12, rir: 2, rest: 90, overrideTarget: 25, note: '3x11 at RIR 2 on 11/13, no cramp reported. 12s now; 3x12 earns 30. LEFT LEG FIRST, warm-up set per leg. BACK FOOT: TOES TUCKED (ball of the foot on the bench, shoe on). Salt/electrolytes before.' },
+        { id: 'standing-calf', name: 'Standing calf raise — HOLD 45 DB', sets: 4, reps: 15, rir: 2, rest: 60, equipment: 'bodyweight', note: '4x14 on 11/13. 4x15 now, then hold the adjustable at 50 for 12s. Last set may go to failure. Type 45 in.' },
+        { id: 'ab-rollout', name: 'Ab wheel rollout (from knees) — a little more reach', sets: 3, reps: 10, rir: 2, rest: 60, equipment: 'bodyweight', note: '3x10 at the shorter reach on 11/10 and 11/13, back quiet. Reach 2-3 inches farther, same 10s. Pelvis tucked, never let the low back sag. Any back signal -> back to the shorter reach.' },
       ],
       '2': [
         { id: 'front-squat', name: 'Front squat', sets: 4, reps: 5, rir: 1, rest: 210, equipment: 'barbell' },
@@ -612,11 +612,11 @@ const SESSIONS = {
     title: 'Lower 45-min (alternating pairs)',
     phases: {
       '1': [
-        { id: 'hip-thrust', name: 'A1 · Hip thrust — BARBELL', sets: 4, reps: 10, rir: 2, rest: 75, equipment: 'barbell', overrideTarget: 95, note: '~95 total (45 bar + two 25s). 10s, build to 12. Pad the bar (towel or mat). Bench edge under the shoulder blades, chin tucked, eyes on your knees at the top, ribs down - squeeze glutes, do not arch. Alternate with A2.' },
-        { id: 'rdl', name: 'A2 · Romanian deadlift (DBs) — 45', sets: 3, reps: 8, rir: 3, rest: 75, overrideTarget: 45, note: 'Back return: only if bending/twisting are pain-free. 3x8 at RIR 3. Alternate with A1.' },
-        { id: 'bulgarian-split-squat', name: 'B1 · BSS — 25 lb', sets: 3, reps: 11, rir: 2, rest: 75, overrideTarget: 25, note: '11s, build to 12. LEFT LEG FIRST. BACK FOOT: TOES TUCKED (ball of the foot on the bench, shoe on) - laces-down points the foot and cramps it. Salt/electrolytes before. Alternate with B2.' },
-        { id: 'standing-calf', name: 'B2 · Standing calf raise — HOLD 45 DB', sets: 4, reps: 14, rir: 2, rest: 60, equipment: 'bodyweight', note: '14s, then 15. Last set may go to failure. Alternate with B1.' },
-        { id: 'ab-rollout', name: 'C · Ab wheel rollout (from knees) — shorter reach', sets: 2, reps: 10, rir: 2, rest: 45, equipment: 'bodyweight', note: 'Shorter reach while the back clears. Skip if the clock runs out.' },
+        { id: 'hip-thrust', name: 'A1 · Hip thrust — BARBELL 105', sets: 4, reps: 10, rir: 2, rest: 75, equipment: 'barbell', overrideTarget: 105, note: '105 total (45 bar + 25s + 5s). No 5-lb plates -> 95 for 4x12. Build 10s to 12, then +10. Pad the bar (new pad, or towel/mat until it arrives). Bench edge under the shoulder blades, chin tucked, eyes on your knees at the top, ribs down - squeeze glutes, do not arch. Alternate with A2.' },
+        { id: 'rdl', name: 'A2 · Romanian deadlift (DBs) — 45', sets: 3, reps: 9, rir: 2, rest: 75, overrideTarget: 45, note: '3x9, stop at 2 reps left. Any back signal -> stop, glute bridges instead. Alternate with A1.' },
+        { id: 'bulgarian-split-squat', name: 'B1 · BSS — 25 lb', sets: 3, reps: 12, rir: 2, rest: 75, overrideTarget: 25, note: '12s now; 3x12 earns 30. LEFT LEG FIRST. BACK FOOT: TOES TUCKED (ball of the foot on the bench, shoe on). Salt/electrolytes before. Alternate with B2.' },
+        { id: 'standing-calf', name: 'B2 · Standing calf raise — HOLD 45 DB', sets: 4, reps: 15, rir: 2, rest: 60, equipment: 'bodyweight', note: '15s, then 50 on the adjustable. Last set may go to failure. Alternate with B1.' },
+        { id: 'ab-rollout', name: 'C · Ab wheel rollout (from knees) — a little more reach', sets: 2, reps: 10, rir: 2, rest: 45, equipment: 'bodyweight', note: 'Reach 2-3 inches farther than the short reach. Skip if the clock runs out.' },
       ],
       '2': [],
       '3': [],

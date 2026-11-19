@@ -426,11 +426,11 @@ const MIN_1RM_BASELINE = {
   'hammer-curl': 21.5,
   'tricep-ext': 25,         // 11/17: 16.25×16×RIR0 (left arm)
   'lateral-raise': 21,      // 11/11: 12.5×18×RIR2
-  'hip-thrust': 200,        // 11/16: barbell 125×18×RIR0 (18-rep est, rough)
+  'hip-thrust': 225,        // 11/19: barbell 135×20 (reps only, 20-rep est is rough)
   'single-leg-rdl': 20.5,   // confirmed multiple sessions
-  'bulgarian-split-squat': 36.5, // 11/16: 25×12×RIR2
+  'bulgarian-split-squat': 37.5, // 11/19: 25×12×RIR3
   'db-pullover': 60,        // 11/14: 40×12×RIR3
-  'rdl': 63,                // 11/16: 45×9×RIR3
+  'rdl': 64.5,              // 11/19: 45×10×RIR3
 };
 
 // ============================================================================
@@ -491,11 +491,11 @@ const SESSIONS = {
     title: 'Lower Power',
     phases: {
       '1': [
-        { id: 'hip-thrust', name: 'Hip thrust — BARBELL 135', sets: 4, reps: 12, rir: 2, rest: 150, equipment: 'barbell', overrideTarget: 135, note: '125 x18 to failure on 11/16. 135 = bar + two 45s. Sets 1-3: 12 reps. DO NOT add weight mid-session - the test set tells me the next weight. TEST SET: on the last set do as many clean reps as you can AT THIS WEIGHT; stop when your hips no longer reach full height without arching. Pad the bar. Bench edge under the shoulder blades, chin tucked, eyes on your knees at the top, ribs down - squeeze glutes, do not arch. Ramp: bar x8, 95 x5.' },
-        { id: 'rdl', name: 'Romanian deadlift (DBs) — 45', sets: 3, reps: 10, rir: 2, rest: 120, overrideTarget: 45, note: '3x9 on 11/16, back quiet. 3x10 now, stop at 2 reps left - never to failure. 3x10 earns 50. Any back signal -> stop, glute bridges instead.' },
-        { id: 'bulgarian-split-squat', name: 'BSS — 25 lb', sets: 3, reps: 12, rir: 2, rest: 120, overrideTarget: 25, note: '11/16: left 3x12, right failed at 9 on set 3 (it always goes second, tired). REST 45 SEC BETWEEN LEGS, then 2:00 after both. Stop each leg with 1-2 left - not a failure lift. Log the lower leg. 3x12 on BOTH legs earns 30. LEFT LEG FIRST. BACK FOOT: TOES TUCKED (ball of the foot on the bench, shoe on). Salt/electrolytes before.' },
-        { id: 'standing-calf', name: 'Standing calf raise — HOLD 55 DB', sets: 4, reps: 13, rir: 2, rest: 60, equipment: 'bodyweight', note: '45 x17 to failure on 11/16 -> 55 on the adjustable. Sets 1-3: 13 reps. LAST SET: go until you cannot do another clean rep, log it as RIR 0 - that number sets the next target. Type 55 in.' },
-        { id: 'ab-rollout', name: 'Ab wheel rollout (from knees) — same reach as 11/16', sets: 3, reps: 12, rir: 2, rest: 60, equipment: 'bodyweight', note: '3x10 at the longer reach on 11/16, back quiet. 12s now at that same reach. Pelvis tucked, never let the low back sag. Any back signal -> shorter reach.' },
+        { id: 'hip-thrust', name: 'Hip thrust — BARBELL 155', sets: 4, reps: 10, rir: 2, rest: 150, equipment: 'barbell', overrideTarget: 155, note: '135 x20 on the test set 11/19. 155 = bar + 45s + 10s. Sets 1-3: 10 reps. DO NOT add weight mid-session. TEST SET: on the last set do as many clean reps as you can AT THIS WEIGHT - all the way, until your hips no longer reach full height without arching. Log it as RIR 0. Pad the bar. Bench edge under the shoulder blades, chin tucked, eyes on your knees at the top, ribs down - squeeze glutes, do not arch. Ramp: bar x8, 95 x5, 135 x3.' },
+        { id: 'rdl', name: 'Romanian deadlift (DBs) — 47.5 (45 + 2 magnets each)', sets: 3, reps: 8, rir: 2, rest: 120, overrideTarget: 47.5, note: '3x10 at 45 on 11/19, back quiet. Half step for the back: 47.5 x 3x8, stop at 2 left - never to failure. Build to 10, then 50. Any back signal -> stop, glute bridges instead.' },
+        { id: 'bulgarian-split-squat', name: 'BSS — 27.5 (25 + 2 magnets each)', sets: 3, reps: 9, rir: 2, rest: 120, overrideTarget: 27.5, note: '3x12 on both legs at 25 on 11/19 - the break between legs worked. 27.5 x 3x9, build to 12, then 30. If the magnets will not go on, stay at 25 for 3x13. REST 45 SEC BETWEEN LEGS. Stop each leg with 1-2 left - not a failure lift. Log the lower leg. LEFT LEG FIRST. BACK FOOT: TOES TUCKED (ball of the foot on the bench, shoe on). Salt/electrolytes before.' },
+        { id: 'standing-calf', name: 'Standing calf raise — HOLD 65 DB', sets: 4, reps: 12, rir: 2, rest: 60, equipment: 'bodyweight', note: '55 x13 with 4 left on 11/19 - too light. 65 on the adjustable. Sets 1-3: 12 reps. LAST SET: go until you cannot do another clean rep, log it as RIR 0 - that number sets the next target. Type 65 in.' },
+        { id: 'ab-rollout', name: 'Ab wheel rollout (from knees) — same reach', sets: 3, reps: 12, rir: 2, rest: 60, equipment: 'bodyweight', note: '3x12 on 11/19 (last set 1 left). Same 3x12 at the same reach until every set leaves 2, then reach farther. Pelvis tucked, never let the low back sag. Any back signal -> shorter reach.' },
       ],
       '2': [
         { id: 'front-squat', name: 'Front squat', sets: 4, reps: 5, rir: 1, rest: 210, equipment: 'barbell' },
@@ -612,11 +612,11 @@ const SESSIONS = {
     title: 'Lower 45-min (alternating pairs)',
     phases: {
       '1': [
-        { id: 'hip-thrust', name: 'A1 · Hip thrust — BARBELL 135', sets: 4, reps: 12, rir: 2, rest: 75, equipment: 'barbell', overrideTarget: 135, note: '135 = bar + two 45s. Sets 1-3: 12 reps. No adding weight mid-session. TEST SET: on the last set do as many clean reps as you can AT THIS WEIGHT; stop when your hips no longer reach full height without arching. Pad the bar. Bench edge under the shoulder blades, chin tucked, eyes on your knees at the top, ribs down - squeeze glutes, do not arch. Alternate with A2.' },
-        { id: 'rdl', name: 'A2 · Romanian deadlift (DBs) — 45', sets: 3, reps: 10, rir: 2, rest: 75, overrideTarget: 45, note: '3x10, stop at 2 reps left - never to failure. Any back signal -> stop, glute bridges instead. Alternate with A1.' },
-        { id: 'bulgarian-split-squat', name: 'B1 · BSS — 25 lb', sets: 3, reps: 12, rir: 2, rest: 75, overrideTarget: 25, note: '12s. Rest 45 sec between legs. Stop each leg with 1-2 left (not a failure lift). Log the lower leg. LEFT LEG FIRST. BACK FOOT: TOES TUCKED (ball of the foot on the bench, shoe on). Salt/electrolytes before. Alternate with B2.' },
-        { id: 'standing-calf', name: 'B2 · Standing calf raise — HOLD 55 DB', sets: 4, reps: 13, rir: 2, rest: 60, equipment: 'bodyweight', note: '55 on the adjustable. Sets 1-3: 13 reps. LAST SET: go until you cannot do another clean rep, log it as RIR 0 - that number sets the next target. Alternate with B1.' },
-        { id: 'ab-rollout', name: 'C · Ab wheel rollout (from knees) — same reach as 11/16', sets: 2, reps: 12, rir: 2, rest: 45, equipment: 'bodyweight', note: '12s at the 11/16 reach. Skip if the clock runs out.' },
+        { id: 'hip-thrust', name: 'A1 · Hip thrust — BARBELL 155', sets: 4, reps: 10, rir: 2, rest: 75, equipment: 'barbell', overrideTarget: 155, note: '155 = bar + 45s + 10s. Sets 1-3: 10 reps. No adding weight mid-session. TEST SET: on the last set do as many clean reps as you can AT THIS WEIGHT - all the way, until your hips no longer reach full height without arching. Log it as RIR 0. Pad the bar. Bench edge under the shoulder blades, chin tucked, eyes on your knees at the top, ribs down - squeeze glutes, do not arch. Alternate with A2.' },
+        { id: 'rdl', name: 'A2 · Romanian deadlift (DBs) — 47.5 (45 + 2 magnets each)', sets: 3, reps: 8, rir: 2, rest: 75, overrideTarget: 47.5, note: '47.5 x 3x8, stop at 2 left - never to failure. Any back signal -> stop, glute bridges instead. Alternate with A1.' },
+        { id: 'bulgarian-split-squat', name: 'B1 · BSS — 27.5 (25 + 2 magnets each)', sets: 3, reps: 9, rir: 2, rest: 75, overrideTarget: 27.5, note: '27.5 x 3x9. No magnets -> 25 for 3x13. REST 45 SEC BETWEEN LEGS. Stop each leg with 1-2 left - not a failure lift. Log the lower leg. LEFT LEG FIRST. BACK FOOT: TOES TUCKED (ball of the foot on the bench, shoe on). Salt/electrolytes before. Alternate with B2.' },
+        { id: 'standing-calf', name: 'B2 · Standing calf raise — HOLD 65 DB', sets: 4, reps: 12, rir: 2, rest: 60, equipment: 'bodyweight', note: '65 on the adjustable. Sets 1-3: 12 reps. LAST SET: go until you cannot do another clean rep, log it as RIR 0 - that number sets the next target. Alternate with B1.' },
+        { id: 'ab-rollout', name: 'C · Ab wheel rollout (from knees) — same reach', sets: 2, reps: 12, rir: 2, rest: 45, equipment: 'bodyweight', note: '12s at the same reach. Skip if the clock runs out.' },
       ],
       '2': [],
       '3': [],
@@ -1113,6 +1113,12 @@ function renderOneRMTable() {
 let restInterval = null;
 let restSecondsLeft = 0;
 let restPaused = false;
+// The countdown is derived from the wall clock, not from counting ticks.
+// Browsers slow or suspend timers when the page is in the background or the
+// phone is locked, so a tick-counting timer falls behind real time.
+let restEndsAt = 0;        // ms timestamp when the rest ends (while running)
+let restRemainingMs = 0;   // time left, held while paused
+let restHideTimeout = null;
 
 const restTimerEl = document.getElementById('rest-timer');
 const restDisplayEl = document.getElementById('rest-timer-display');
@@ -1120,14 +1126,16 @@ const restNameEl = document.getElementById('rest-timer-name');
 
 function startRestTimer(seconds, liftName) {
   stopRestInterval();
+  if (restHideTimeout) { clearTimeout(restHideTimeout); restHideTimeout = null; }
   restSecondsLeft = seconds;
+  restEndsAt = Date.now() + seconds * 1000;
   restPaused = false;
   restNameEl.textContent = liftName || '';
   restTimerEl.classList.add('show');
   restTimerEl.classList.remove('done');
   document.getElementById('rest-pause-btn').textContent = 'Pause';
   updateRestDisplay();
-  restInterval = setInterval(tickRest, 1000);
+  restInterval = setInterval(tickRest, 250);
 }
 
 function stopRestInterval() {
@@ -1138,13 +1146,18 @@ function stopRestInterval() {
 }
 
 function tickRest() {
-  if (restPaused) return;
-  restSecondsLeft--;
+  if (restPaused || !restInterval) return;
+  restSecondsLeft = Math.max(0, Math.ceil((restEndsAt - Date.now()) / 1000));
   updateRestDisplay();
   if (restSecondsLeft <= 0) {
     onRestDone();
   }
 }
+
+// Catch up the moment the page is shown again (after a lock screen or app switch).
+document.addEventListener('visibilitychange', () => {
+  if (!document.hidden) tickRest();
+});
 
 function updateRestDisplay() {
   restDisplayEl.textContent = formatTime(Math.max(0, restSecondsLeft));
@@ -1156,7 +1169,8 @@ function onRestDone() {
   restNameEl.textContent = '⚡ Time! Next set.';
   beep();
   if (navigator.vibrate) navigator.vibrate([220, 100, 220, 100, 220]);
-  setTimeout(() => {
+  restHideTimeout = setTimeout(() => {
+    restHideTimeout = null;
     restTimerEl.classList.remove('show', 'done');
   }, 5000);
 }
@@ -1186,7 +1200,13 @@ function beep() {
 }
 
 document.getElementById('rest-pause-btn').addEventListener('click', () => {
-  restPaused = !restPaused;
+  if (!restPaused) {
+    restRemainingMs = Math.max(0, restEndsAt - Date.now());
+    restPaused = true;
+  } else {
+    restEndsAt = Date.now() + restRemainingMs;
+    restPaused = false;
+  }
   document.getElementById('rest-pause-btn').textContent = restPaused ? 'Resume' : 'Pause';
 });
 document.getElementById('rest-skip-btn').addEventListener('click', () => {
@@ -1194,6 +1214,8 @@ document.getElementById('rest-skip-btn').addEventListener('click', () => {
   restTimerEl.classList.remove('show', 'done');
 });
 document.getElementById('rest-add-btn').addEventListener('click', () => {
+  restEndsAt += 15000;
+  restRemainingMs += 15000;
   restSecondsLeft += 15;
   updateRestDisplay();
 });
